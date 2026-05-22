@@ -104,7 +104,7 @@ export default function Differentials() {
       className="relative overflow-hidden bg-got-white"
     >
       <span className="section-number text-got-black">04</span>
-      <div className="relative z-10 px-6 pt-24 pb-10 lg:px-16 lg:pt-32 lg:pb-14">
+      <div className="relative z-10 px-6 py-16 lg:px-16 lg:py-20">
         <div className="mb-6 flex items-center gap-2">
           <span className="inline-block h-2 w-2 rounded-full bg-got-accent" />
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-got-light">
@@ -112,14 +112,14 @@ export default function Differentials() {
           </span>
         </div>
 
-        <div ref={headingRef} className="mb-10 lg:mb-12">
+        <div ref={headingRef} className="mb-6 lg:mb-8">
           <h2 className="text-4xl font-black text-got-black sm:text-5xl lg:text-7xl">
             Por que o<br />
             <span className="text-got-accent">–</span>GRUPO GOT
           </h2>
         </div>
 
-        <div ref={textRef} className="mb-12 grid grid-cols-1 gap-6 lg:mb-16 lg:grid-cols-2 lg:gap-8">
+        <div ref={textRef} className="mb-8 grid grid-cols-1 gap-6 lg:mb-10 lg:grid-cols-2 lg:gap-8">
           <p className="text-base leading-relaxed text-got-gray sm:text-lg lg:text-xl">
             Escolher o GRUPO GOT é escolher um parceiro que entende a cultura de
             verdade. Em mais de 5 anos de atuação, construímos um ecossistema que
