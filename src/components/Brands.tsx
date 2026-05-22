@@ -137,11 +137,15 @@ export default function Brands() {
       );
 
       // Fade in THE OG info
-      tl.from(
+      tl.fromTo(
         ".info-theog",
         {
           autoAlpha: 0,
           x: 30,
+        },
+        {
+          autoAlpha: 1,
+          x: 0,
           duration: 0.08,
           ease: "power2.out",
         },
