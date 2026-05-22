@@ -43,11 +43,11 @@ const differentials = [
 export default function Differentials() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      // Heading animation
       if (headingRef.current) {
         gsap.from(headingRef.current, {
           opacity: 0,
@@ -62,7 +62,21 @@ export default function Differentials() {
         });
       }
 
-      // Cards stagger animation — smooth and gentle
+      if (textRef.current) {
+        gsap.from(textRef.current, {
+          opacity: 0,
+          y: 30,
+          duration: 1,
+          delay: 0.3,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: textRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        });
+      }
+
       if (gridRef.current) {
         const cards = gridRef.current.querySelectorAll(".diff-card");
         gsap.from(cards, {
@@ -98,16 +112,36 @@ export default function Differentials() {
           </span>
         </div>
 
-        <div ref={headingRef} className="mb-16 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div ref={headingRef} className="mb-8">
           <h2 className="text-5xl font-black text-got-black lg:text-7xl">
             Por que o<br />
             <span className="text-got-accent">–</span>GRUPO GOT
           </h2>
-          <p className="max-w-md text-base leading-relaxed text-got-gray lg:text-right">
-            Mais de 5 anos transformando cultura e autenticidade em marcas que
-            geram identificação real. Conheça os diferenciais que fazem do nosso
-            ecossistema uma referência no lifestyle urbano brasileiro.
+        </div>
+
+        <div ref={textRef} className="mb-20 grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <p className="text-lg leading-relaxed text-got-gray lg:text-xl">
+            Escolher o GRUPO GOT é escolher um parceiro que entende a cultura de
+            verdade. Em mais de 5 anos de atuação, construímos um ecossistema que
+            vai além da venda de produtos — criamos marcas que as pessoas vestem
+            com orgulho, defendem e recomendam. Com mais de 5.000 pontos de venda
+            em 27 estados, oferecemos uma estrutura consolidada e uma demanda que
+            já existe nas ruas.
           </p>
+          <p className="text-lg leading-relaxed text-got-gray lg:text-xl">
+            Nossas marcas nascem da vivência real com a cultura urbana brasileira,
+            não de tendências importadas. Isso gera identificação genuína, fidelidade
+            e recompra. Quem trabalha com o GRUPO GOT não distribui apenas produtos
+            — distribui relevância cultural. E isso, no mercado, faz toda a diferença.
+          </p>
+        </div>
+
+        <div className="mb-8 flex items-center gap-4">
+          <div className="h-px flex-1 bg-got-black/10" />
+          <span className="text-xs font-medium uppercase tracking-[0.2em] text-got-light">
+            Nossos diferenciais
+          </span>
+          <div className="h-px flex-1 bg-got-black/10" />
         </div>
 
         <div ref={gridRef} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
