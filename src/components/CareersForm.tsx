@@ -126,9 +126,6 @@ export default function CareersForm() {
             </a>
           </div>
 
-          <p className="anim-career mt-6 text-sm text-got-gray">
-            +55 21 99205-5840
-          </p>
         </div>
       </div>
     </ParallaxSection>

@@ -113,9 +113,6 @@ export default function ContactForm() {
             </a>
           </div>
 
-          <p className="anim-contact mt-6 text-sm text-got-gray">
-            +55 21 99205-5840 · Seg a Sex, 9h às 18h
-          </p>
         </div>
       </div>
     </ParallaxSection>
