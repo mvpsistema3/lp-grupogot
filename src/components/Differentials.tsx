@@ -79,6 +79,7 @@ export default function Differentials() {
 
       if (gridRef.current) {
         const cards = gridRef.current.querySelectorAll(".diff-card");
+        gsap.set(cards, { opacity: 1, y: 0, scale: 1 });
         gsap.from(cards, {
           opacity: 0,
           y: 50,
@@ -88,7 +89,7 @@ export default function Differentials() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: gridRef.current,
-            start: "top 80%",
+            start: "top 90%",
             once: true,
           },
         });
