@@ -209,7 +209,7 @@ export default function Hero() {
       {/* ===== 2. LOGO WATERMARK BACK LAYER ===== */}
       <div
         ref={watermarkBackRef}
-        className="absolute inset-0 z-10 flex items-center justify-center"
+        className="absolute inset-0 z-10 flex items-start justify-center pt-[15vh] sm:pt-[18vh]"
       >
         <img
           src="/logos/logo-got.png"
@@ -227,7 +227,7 @@ export default function Hero() {
       {/* ===== 3. HERO IMAGE PLACEHOLDER ===== */}
       <div
         ref={heroImageRef}
-        className="absolute inset-0 z-[15] flex items-center justify-center px-6"
+        className="absolute inset-0 z-[15] flex items-start justify-center px-6 pt-[15vh] sm:pt-[18vh]"
       >
         <div className="relative w-full max-w-4xl">
           {/* 16:9 aspect ratio container */}
@@ -299,7 +299,7 @@ export default function Hero() {
       {/* ===== 4. LOGO WATERMARK FRONT LAYER ===== */}
       <div
         ref={watermarkFrontRef}
-        className="pointer-events-none absolute inset-0 z-[25] flex items-center justify-center"
+        className="pointer-events-none absolute inset-0 z-[25] flex items-start justify-center pt-[15vh] sm:pt-[18vh]"
       >
         <img
           src="/logos/logo-got.png"
