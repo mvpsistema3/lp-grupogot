@@ -104,7 +104,7 @@ export default function Differentials() {
       className="relative overflow-hidden bg-got-white"
     >
       <span className="section-number text-got-black">04</span>
-      <div className="relative z-10 px-6 py-12 lg:px-16 lg:py-32">
+      <div className="relative z-10 px-6 py-24 lg:px-16 lg:py-32">
         <div className="mb-6 flex items-center gap-2">
           <span className="inline-block h-2 w-2 rounded-full bg-got-accent" />
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-got-light">
@@ -112,15 +112,15 @@ export default function Differentials() {
           </span>
         </div>
 
-        <div ref={headingRef} className="mb-8">
-          <h2 className="text-5xl font-black text-got-black lg:text-7xl">
+        <div ref={headingRef} className="mb-10 lg:mb-12">
+          <h2 className="text-4xl font-black text-got-black sm:text-5xl lg:text-7xl">
             Por que o<br />
             <span className="text-got-accent">–</span>GRUPO GOT
           </h2>
         </div>
 
-        <div ref={textRef} className="mb-10 grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <p className="text-lg leading-relaxed text-got-gray lg:text-xl">
+        <div ref={textRef} className="mb-12 grid grid-cols-1 gap-6 lg:mb-16 lg:grid-cols-2 lg:gap-8">
+          <p className="text-base leading-relaxed text-got-gray sm:text-lg lg:text-xl">
             Escolher o GRUPO GOT é escolher um parceiro que entende a cultura de
             verdade. Em mais de 5 anos de atuação, construímos um ecossistema que
             vai além da venda de produtos — criamos marcas que as pessoas vestem
@@ -128,7 +128,7 @@ export default function Differentials() {
             em 27 estados, oferecemos uma estrutura consolidada e uma demanda que
             já existe nas ruas.
           </p>
-          <p className="text-lg leading-relaxed text-got-gray lg:text-xl">
+          <p className="text-base leading-relaxed text-got-gray sm:text-lg lg:text-xl">
             Nossas marcas nascem da vivência real com a cultura urbana brasileira,
             não de tendências importadas. Isso gera identificação genuína, fidelidade
             e recompra. Quem trabalha com o GRUPO GOT não distribui apenas produtos
@@ -136,7 +136,7 @@ export default function Differentials() {
           </p>
         </div>
 
-        <div className="mb-8 flex items-center gap-4">
+        <div className="mb-10 flex items-center gap-4 lg:mb-12">
           <div className="h-px flex-1 bg-got-black/10" />
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-got-light">
             Nossos diferenciais
@@ -144,16 +144,16 @@ export default function Differentials() {
           <div className="h-px flex-1 bg-got-black/10" />
         </div>
 
-        <div ref={gridRef} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div ref={gridRef} className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
           {differentials.map((item, i) => (
             <div
               key={i}
-              className="diff-card group cursor-pointer rounded-3xl bg-got-black p-8 transition-all duration-500 hover:bg-got-accent"
+              className="diff-card group cursor-pointer rounded-3xl bg-got-black p-6 transition-all duration-500 hover:bg-got-accent sm:p-8"
             >
-              <span className="mb-4 block text-3xl font-black text-got-accent transition-colors duration-500 group-hover:text-got-black">
+              <span className="mb-3 block text-2xl font-black text-got-accent transition-colors duration-500 group-hover:text-got-black sm:mb-4 sm:text-3xl">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mb-3 text-lg font-bold text-got-pure transition-colors duration-500 group-hover:text-got-black">
+              <h3 className="mb-2 text-base font-bold text-got-pure transition-colors duration-500 group-hover:text-got-black sm:mb-3 sm:text-lg">
                 {item.title}
               </h3>
               <p className="text-sm leading-relaxed text-got-light transition-colors duration-500 group-hover:text-got-black/70">
