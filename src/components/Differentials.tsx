@@ -104,7 +104,7 @@ export default function Differentials() {
       className="relative overflow-hidden bg-got-white"
     >
       <span className="section-number text-got-black">04</span>
-      <div className="relative z-10 px-6 py-24 lg:px-16 lg:py-32">
+      <div className="relative z-10 px-6 pt-24 pb-10 lg:px-16 lg:pt-32 lg:pb-14">
         <div className="mb-6 flex items-center gap-2">
           <span className="inline-block h-2 w-2 rounded-full bg-got-accent" />
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-got-light">
@@ -136,7 +136,7 @@ export default function Differentials() {
           </p>
         </div>
 
-        <div className="mb-10 flex items-center gap-4 lg:mb-12">
+        <div className="mb-6 flex items-center gap-4 lg:mb-8">
           <div className="h-px flex-1 bg-got-black/10" />
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-got-light">
             Nossos diferenciais
