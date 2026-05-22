@@ -113,6 +113,9 @@ export default function ContactForm() {
             </a>
           </div>
 
+          <p className="anim-contact mt-8 text-xs text-got-gray/60">
+            Atendimento de Seg a Sex, 9h às 18h
+          </p>
         </div>
       </div>
     </ParallaxSection>

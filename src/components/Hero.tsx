@@ -101,7 +101,7 @@ export default function Hero() {
 
       if (watermarkFrontRef.current) {
         gsap.to(watermarkFrontRef.current, {
-          y: -160,
+          y: -80,
           ease: "none",
           scrollTrigger: {
             trigger: heroRef.current,
@@ -272,11 +272,10 @@ export default function Hero() {
           src="/logos/logo-got.png"
           alt=""
           aria-hidden="true"
-          className="w-[60vw] max-w-[600px] select-none"
+          className="w-[80vw] max-w-[800px] select-none"
           style={{
             opacity: 0.06,
             mixBlendMode: "lighten",
-            transform: "translate(10%, 8%)",
           }}
           draggable={false}
         />
