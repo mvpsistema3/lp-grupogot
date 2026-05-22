@@ -50,11 +50,18 @@ export default function AgeGate() {
       className="fixed inset-0 flex flex-col items-center justify-center bg-got-black px-6 text-center"
       style={{ zIndex: 9999, opacity: 0 }}
     >
-      <img
-        src="/logos/logo-got.png"
-        alt="GRUPO GOT"
-        className="mb-10 w-32"
-      />
+      <div className="relative mb-10 flex flex-col items-center">
+        <div className="absolute inset-0 -m-8 rounded-full bg-got-accent/5 blur-3xl" />
+        <img
+          src="/logos/logo-got.png"
+          alt="GRUPO GOT"
+          className="relative w-40"
+          style={{ mixBlendMode: 'lighten' }}
+        />
+        <span className="relative mt-3 text-xs uppercase tracking-[0.5em] text-got-light">
+          GRUPO GOT
+        </span>
+      </div>
 
       <p className="mb-3 max-w-md text-lg font-medium text-got-white">
         Este site é destinado a maiores de 18 anos.
@@ -68,14 +75,14 @@ export default function AgeGate() {
       <div className="flex flex-col gap-4 sm:flex-row">
         <button
           onClick={handleConfirm}
-          className="cursor-pointer rounded-full bg-got-accent px-8 py-3 text-sm font-bold text-got-black transition-opacity hover:opacity-90"
+          className="cursor-pointer rounded-full bg-got-accent px-10 py-4 text-base font-bold text-got-black transition-opacity hover:opacity-90"
         >
           Sim, tenho 18 anos ou mais
         </button>
 
         <button
           onClick={handleDeny}
-          className="cursor-pointer rounded-full border border-got-gray bg-transparent px-8 py-3 text-sm text-got-light transition-opacity hover:opacity-80"
+          className="cursor-pointer rounded-full border border-got-gray/40 bg-transparent px-6 py-2.5 text-xs text-got-light/70 transition-opacity hover:opacity-80"
         >
           Não
         </button>

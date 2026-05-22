@@ -11,63 +11,84 @@ export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const watermarkBackRef = useRef<HTMLDivElement>(null);
   const watermarkFrontRef = useRef<HTMLDivElement>(null);
+  const heroImageRef = useRef<HTMLDivElement>(null);
+  const glassCardsRef = useRef<HTMLDivElement>(null);
   const socialsRef = useRef<HTMLDivElement>(null);
   const topTextRef = useRef<HTMLDivElement>(null);
-  const subheadlineRef = useRef<HTMLParagraphElement>(null);
-  const badgesRef = useRef<HTMLDivElement>(null);
-  const ctasRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      // --- Entrance animations (on load) ---
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
+      // 1. Hero image placeholder scales in
+      tl.fromTo(
+        heroImageRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 1.2 }
+      );
+
+      // 2. Watermark back fades in
+      tl.fromTo(
+        watermarkBackRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8 },
+        "-=0.9"
+      );
+
+      // 3. Watermark front fades in
+      tl.fromTo(
+        watermarkFrontRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8 },
+        "-=0.6"
+      );
+
+      // 4. Glass tooltip cards stagger in
+      const cards = glassCardsRef.current?.querySelectorAll(".glass-tooltip");
+      if (cards && cards.length > 0) {
+        tl.fromTo(
+          cards,
+          { opacity: 0, y: 30, rotation: 0 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.2 },
+          "-=0.4"
+        );
+      }
+
+      // 5. Top text fades in
       tl.fromTo(
         topTextRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8 }
-      )
-        .fromTo(
-          socialsRef.current?.querySelectorAll(".social-icon") ?? [],
-          { opacity: 0, x: -20 },
-          { opacity: 1, x: 0, duration: 0.5, stagger: 0.1 },
-          "-=0.4"
-        )
-        .fromTo(
-          watermarkBackRef.current,
-          { opacity: 0, scale: 0.95 },
-          { opacity: 1, scale: 1, duration: 1 },
-          "-=0.5"
-        )
-        .fromTo(
-          watermarkFrontRef.current,
-          { opacity: 0, scale: 1.05 },
-          { opacity: 1, scale: 1, duration: 1 },
-          "-=0.8"
-        )
-        .fromTo(
-          subheadlineRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          "-=0.6"
-        )
-        .fromTo(
-          badgesRef.current?.querySelectorAll(".badge-pill") ?? [],
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 },
-          "-=0.4"
-        )
-        .fromTo(
-          ctasRef.current?.querySelectorAll("button") ?? [],
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.3"
+      );
+
+      // 6. Bottom badges and CTAs stagger up
+      const bottomItems = bottomRef.current?.querySelectorAll(".anim-item");
+      if (bottomItems && bottomItems.length > 0) {
+        tl.fromTo(
+          bottomItems,
           { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 },
+          { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 },
+          "-=0.2"
+        );
+      }
+
+      // 7. Social icons stagger from left
+      const icons = socialsRef.current?.querySelectorAll(".social-icon");
+      if (icons && icons.length > 0) {
+        tl.fromTo(
+          icons,
+          { opacity: 0, x: -20 },
+          { opacity: 1, x: 0, duration: 0.3, stagger: 0.1 },
           "-=0.3"
         );
+      }
 
-      // --- Parallax on scroll ---
+      // --- ScrollTrigger parallax ---
       if (watermarkBackRef.current) {
         gsap.to(watermarkBackRef.current, {
-          y: -100,
+          y: -80,
           ease: "none",
           scrollTrigger: {
             trigger: heroRef.current,
@@ -80,7 +101,33 @@ export default function Hero() {
 
       if (watermarkFrontRef.current) {
         gsap.to(watermarkFrontRef.current, {
-          y: -200,
+          y: -160,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+
+      if (heroImageRef.current) {
+        gsap.to(heroImageRef.current, {
+          y: -40,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+
+      if (glassCardsRef.current) {
+        gsap.to(glassCardsRef.current, {
+          y: -60,
           ease: "none",
           scrollTrigger: {
             trigger: heroRef.current,
@@ -99,7 +146,7 @@ export default function Hero() {
       ref={heroRef}
       className="relative min-h-screen overflow-hidden bg-got-black"
     >
-      {/* 1 - Background gradient layer */}
+      {/* ===== 1. BACKGROUND ===== */}
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -107,89 +154,187 @@ export default function Hero() {
             "linear-gradient(160deg, #0A0A0A 0%, #111111 40%, #0A0A0A 100%)",
         }}
       />
-      {/* Subtle noise / dot pattern overlay */}
+      {/* Fine grain noise texture */}
       <div
-        className="absolute inset-0 z-0 opacity-[0.03]"
+        className="absolute inset-0 z-[1] opacity-[0.04]"
         style={{
           backgroundImage:
-            "radial-gradient(circle, #F5F5F5 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E\")",
+          backgroundRepeat: "repeat",
+          backgroundSize: "128px 128px",
+        }}
+      />
+      {/* Blurred accent circle */}
+      <div
+        className="absolute left-1/2 top-1/3 z-[2] h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.03]"
+        style={{
+          background: "var(--color-got-accent)",
+          filter: "blur(200px)",
         }}
       />
 
-      {/* 2 - GOT watermark BEHIND content */}
+      {/* ===== 2. LOGO WATERMARK BACK LAYER ===== */}
       <div
         ref={watermarkBackRef}
         className="absolute inset-0 z-10 flex items-center justify-center"
       >
-        <span
-          className="got-watermark text-white"
-          style={{ opacity: 0.08 }}
-        >
-          GOT
-        </span>
+        <img
+          src="/logos/logo-got.png"
+          alt=""
+          aria-hidden="true"
+          className="w-[80vw] max-w-[800px] select-none"
+          style={{
+            opacity: 0.12,
+            mixBlendMode: "lighten",
+          }}
+          draggable={false}
+        />
       </div>
 
-      {/* 3 - Main content layer */}
+      {/* ===== 3. HERO IMAGE PLACEHOLDER ===== */}
       <div
-        ref={topTextRef}
-        className="relative z-20 flex min-h-screen flex-col justify-between px-6 py-8 sm:px-12 sm:py-12"
+        ref={heroImageRef}
+        className="absolute inset-0 z-[15] flex items-center justify-center px-6"
       >
-        {/* Top row */}
-        <div className="flex items-start justify-between">
-          <p className="text-xs tracking-widest text-got-light uppercase sm:text-sm">
+        <div className="relative w-full max-w-4xl">
+          {/* 16:9 aspect ratio container */}
+          <div
+            className="relative overflow-hidden rounded-3xl border border-got-gray/10"
+            style={{ aspectRatio: "16/9" }}
+          >
+            {/* Dark gradient fill */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0d0d0d 100%)",
+              }}
+            />
+            {/* Smoke/wave CSS pattern */}
+            <div
+              className="absolute inset-0 opacity-30"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 30% 50%, rgba(200,255,0,0.04) 0%, transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(255,255,255,0.02) 0%, transparent 50%)",
+              }}
+            />
+            <div
+              className="absolute inset-0 opacity-20"
+              style={{
+                background:
+                  "conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.01) 120deg, transparent 240deg, rgba(200,255,0,0.02) 360deg)",
+              }}
+            />
+            {/* Glass overlay with text */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="rounded-2xl border border-white/5 bg-white/[0.02] px-12 py-8 backdrop-blur-sm">
+                <p className="text-center text-2xl font-bold tracking-[0.2em] text-white/20 uppercase sm:text-4xl">
+                  GRUPO GOT
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Glassmorphism tooltip cards */}
+          <div ref={glassCardsRef}>
+            <div
+              className="glass-tooltip absolute -left-4 top-8 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 backdrop-blur-md sm:-left-12 sm:top-12"
+              style={{ transform: "rotate(-2deg)" }}
+            >
+              <p className="text-[10px] font-medium tracking-wider text-got-light/90 uppercase sm:text-xs">
+                THE OG &mdash; Est. 2018
+              </p>
+              <p className="mt-0.5 text-[10px] text-got-light/50 sm:text-[11px]">
+                Lifestyle &amp; Cultura
+              </p>
+            </div>
+            <div
+              className="glass-tooltip absolute -right-4 bottom-8 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3 backdrop-blur-md sm:-right-12 sm:bottom-12"
+              style={{ transform: "rotate(1.5deg)" }}
+            >
+              <p className="text-[10px] font-medium tracking-wider text-got-light/90 uppercase sm:text-xs">
+                SESH &mdash; Est. 2023
+              </p>
+              <p className="mt-0.5 text-[10px] text-got-light/50 sm:text-[11px]">
+                Street &amp; Underground
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== 4. LOGO WATERMARK FRONT LAYER ===== */}
+      <div
+        ref={watermarkFrontRef}
+        className="pointer-events-none absolute inset-0 z-[25] flex items-center justify-center"
+      >
+        <img
+          src="/logos/logo-got.png"
+          alt=""
+          aria-hidden="true"
+          className="w-[60vw] max-w-[600px] select-none"
+          style={{
+            opacity: 0.06,
+            mixBlendMode: "lighten",
+            transform: "translate(10%, 8%)",
+          }}
+          draggable={false}
+        />
+      </div>
+
+      {/* ===== 5. CONTENT OVERLAY ===== */}
+      <div className="relative z-30 flex min-h-screen flex-col justify-between px-6 py-8 sm:px-12 sm:py-12">
+        {/* Top section */}
+        <div ref={topTextRef} className="flex items-start justify-between">
+          <p className="text-[10px] tracking-[0.3em] text-got-light/70 uppercase sm:text-xs">
             Autenticidade // Cultura // Express&atilde;o //
           </p>
-          <div className="text-right text-xs tracking-widest text-got-light sm:text-sm">
+          <p className="text-[10px] text-got-light/50 sm:text-xs">
+            &copy; 2026
+          </p>
+          <div className="text-right text-[10px] text-got-light/70 sm:text-xs">
             <p>Niter&oacute;i / RJ</p>
-            <p>&copy; 2026</p>
+            <p className="mt-0.5 text-got-light/50">
+              R. Visconde do Rio Branco
+            </p>
           </div>
         </div>
 
-        {/* Center spacer - watermark shows through */}
+        {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Bottom content */}
-        <div className="flex flex-col gap-8">
-          {/* Subheadline */}
-          <p
-            ref={subheadlineRef}
-            className="ml-auto max-w-md text-right text-base leading-relaxed text-got-muted sm:text-lg"
-          >
-            Transformamos cultura, autenticidade e express&atilde;o em marcas que
-            geram identifica&ccedil;&atilde;o real nas pessoas.
+        {/* Bottom section */}
+        <div ref={bottomRef} className="flex flex-col items-end gap-6">
+          {/* Headline (mobile emphasis, desktop complement to watermark) */}
+          <p className="anim-item ml-auto max-w-lg text-right text-base leading-relaxed text-got-muted">
+            Cultura, originalidade e express&atilde;o transformadas em marcas que
+            conectam pessoas.
           </p>
 
-          {/* Badge pills */}
-          <div
-            ref={badgesRef}
-            className="flex flex-wrap items-center justify-center gap-3 sm:justify-end"
-          >
-            <span className="badge-pill rounded-full border border-got-gray px-4 py-1.5 text-xs tracking-wide text-got-light">
+          {/* Badges row */}
+          <div className="flex flex-wrap justify-end gap-3">
+            <span className="anim-item rounded-full border border-got-gray/20 px-4 py-2 text-xs text-got-light">
               +5 anos
             </span>
-            <span className="badge-pill rounded-full border border-got-gray px-4 py-1.5 text-xs tracking-wide text-got-light">
+            <span className="anim-item rounded-full border border-got-gray/20 px-4 py-2 text-xs text-got-light">
               +5.000 PDVs
             </span>
-            <span className="badge-pill rounded-full border border-got-gray px-4 py-1.5 text-xs tracking-wide text-got-light">
+            <span className="anim-item rounded-full border border-got-gray/20 px-4 py-2 text-xs text-got-light">
               Nacional
             </span>
           </div>
 
-          {/* CTAs */}
-          <div
-            ref={ctasRef}
-            className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
-          >
+          {/* CTAs row */}
+          <div className="flex flex-col gap-4 sm:flex-row">
             <button
               type="button"
-              className="cursor-pointer rounded-full bg-got-accent px-8 py-3 font-semibold text-got-black transition-all duration-300 hover:brightness-110 hover:scale-[1.02]"
+              className="anim-item cursor-pointer rounded-full bg-got-accent px-8 py-3.5 text-sm font-semibold tracking-wide text-got-black transition-transform hover:scale-[1.02]"
             >
               Fale com nosso Comercial
             </button>
             <button
               type="button"
-              className="cursor-pointer rounded-full border border-got-gray px-8 py-3 text-got-muted transition-all duration-300 hover:border-got-light hover:text-got-pure"
+              className="anim-item cursor-pointer rounded-full border border-got-gray/30 px-8 py-3.5 text-sm text-got-muted transition-colors hover:border-got-light"
             >
               Conhe&ccedil;a nossas marcas
             </button>
@@ -197,50 +342,60 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 4 - GOT watermark IN FRONT (offset, different parallax) */}
-      <div
-        ref={watermarkFrontRef}
-        className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center"
-      >
-        <span
-          className="got-watermark text-white"
-          style={{
-            opacity: 0.05,
-            transform: "translate(8%, 6%)",
-          }}
-        >
-          GOT
-        </span>
-      </div>
-
-      {/* 5 - Social sidebar */}
+      {/* ===== 6. SOCIAL SIDEBAR ===== */}
       <div
         ref={socialsRef}
-        className="fixed left-4 top-1/2 z-30 -translate-y-1/2 sm:left-6"
+        className="absolute left-6 top-1/2 z-30 hidden -translate-y-1/2 lg:flex lg:flex-col lg:gap-3"
       >
-        <div className="flex flex-col gap-4">
-          <a
-            href="#"
-            aria-label="Instagram"
-            className="social-icon flex h-10 w-10 items-center justify-center rounded-full border border-got-gray text-got-light transition-all duration-300 hover:border-got-pure hover:text-got-pure"
+        <a
+          href="#"
+          aria-label="Instagram"
+          className="social-icon flex h-10 w-10 items-center justify-center rounded-full border border-got-gray/30 text-got-light/60 transition-all hover:border-got-pure/40 hover:text-got-pure"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-          </a>
-          <a
-            href="#"
-            aria-label="X"
-            className="social-icon flex h-10 w-10 items-center justify-center rounded-full border border-got-gray text-got-light transition-all duration-300 hover:border-got-pure hover:text-got-pure"
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+          </svg>
+        </a>
+        <a
+          href="#"
+          aria-label="X"
+          className="social-icon flex h-10 w-10 items-center justify-center rounded-full border border-got-gray/30 text-got-light/60 transition-all hover:border-got-pure/40 hover:text-got-pure"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+        <a
+          href="#"
+          aria-label="LinkedIn"
+          className="social-icon flex h-10 w-10 items-center justify-center rounded-full border border-got-gray/30 text-got-light/60 transition-all hover:border-got-pure/40 hover:text-got-pure"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a
-            href="#"
-            aria-label="LinkedIn"
-            className="social-icon flex h-10 w-10 items-center justify-center rounded-full border border-got-gray text-got-light transition-all duration-300 hover:border-got-pure hover:text-got-pure"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+            <rect width="4" height="12" x="2" y="9" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+        </a>
       </div>
     </section>
   );

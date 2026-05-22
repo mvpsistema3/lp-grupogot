@@ -66,7 +66,8 @@ export default function Header() {
           <img
             src="/logos/logo-got.png"
             alt="GRUPO GOT"
-            className="h-8"
+            className="h-10 object-contain"
+            style={{ mixBlendMode: 'lighten' }}
           />
         </a>
 
