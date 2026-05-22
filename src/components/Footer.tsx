@@ -97,7 +97,7 @@ export default function Footer() {
             Autenticidade // Cultura // Expressão
           </p>
           <p className="text-xs text-got-gray/60 mt-4">
-            © 2026 GRUPO GOT. Todos os direitos reservados.
+            GRUPO GOT. Todos os direitos reservados.
           </p>
           <p className="text-xs text-got-gray/60">Tog Brasil LTDA</p>
         </div>

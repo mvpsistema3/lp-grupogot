@@ -1,6 +1,11 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const differentials = [
   {
@@ -36,22 +41,47 @@ const differentials = [
 ];
 
 export default function Differentials() {
-  const [visible, setVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  useGSAP(
+    () => {
+      // Heading animation
+      if (headingRef.current) {
+        gsap.from(headingRef.current, {
+          opacity: 0,
+          y: 40,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        });
+      }
+
+      // Cards stagger animation — smooth and gentle
+      if (gridRef.current) {
+        const cards = gridRef.current.querySelectorAll(".diff-card");
+        gsap.from(cards, {
+          opacity: 0,
+          y: 50,
+          scale: 0.97,
+          stagger: 0.12,
+          duration: 0.9,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        });
+      }
+    },
+    { dependencies: [] }
+  );
 
   return (
     <section
@@ -68,7 +98,7 @@ export default function Differentials() {
           </span>
         </div>
 
-        <div className="mb-16 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div ref={headingRef} className="mb-16 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="text-5xl font-black text-got-black lg:text-7xl">
             Por que o<br />
             <span className="text-got-accent">–</span>GRUPO GOT
@@ -80,16 +110,11 @@ export default function Differentials() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div ref={gridRef} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {differentials.map((item, i) => (
             <div
               key={i}
-              className="group cursor-pointer rounded-3xl bg-got-black p-8 transition-all duration-500 hover:bg-got-accent"
-              style={{
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(40px)",
-                transition: `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`,
-              }}
+              className="diff-card group cursor-pointer rounded-3xl bg-got-black p-8 transition-all duration-500 hover:bg-got-accent"
             >
               <span className="mb-4 block text-3xl font-black text-got-accent transition-colors duration-500 group-hover:text-got-black">
                 {String(i + 1).padStart(2, "0")}

@@ -44,8 +44,8 @@ export default function About() {
           opacity: 0,
           y: 40,
           stagger: 0.15,
-          duration: 0.7,
-          ease: "power3.out",
+          duration: 1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: timelineRef.current,
             start: "top 80%",
@@ -60,8 +60,8 @@ export default function About() {
           opacity: 0,
           y: 50,
           stagger: 0.12,
-          duration: 0.8,
-          ease: "power3.out",
+          duration: 1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: cardsRef.current,
             start: "top 80%",

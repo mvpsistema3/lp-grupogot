@@ -85,6 +85,39 @@ export default function Hero() {
         );
       }
 
+      // --- Social sidebar: turn green + show brand names on scroll ---
+      const socialIcons = socialsRef.current?.querySelectorAll(".social-icon");
+      const socialLabels = socialsRef.current?.querySelectorAll(".social-label");
+      if (socialIcons && socialIcons.length > 0) {
+        ScrollTrigger.create({
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          onUpdate: (self) => {
+            const progress = self.progress;
+            if (progress > 0.05) {
+              socialIcons.forEach((icon) => {
+                (icon as HTMLElement).style.borderColor = "rgba(200,255,0,0.5)";
+                (icon as HTMLElement).style.color = "var(--color-got-accent)";
+              });
+              socialLabels?.forEach((label) => {
+                (label as HTMLElement).style.opacity = "1";
+                (label as HTMLElement).style.maxWidth = "80px";
+              });
+            } else {
+              socialIcons.forEach((icon) => {
+                (icon as HTMLElement).style.borderColor = "";
+                (icon as HTMLElement).style.color = "";
+              });
+              socialLabels?.forEach((label) => {
+                (label as HTMLElement).style.opacity = "0";
+                (label as HTMLElement).style.maxWidth = "0";
+              });
+            }
+          },
+        });
+      }
+
       // --- ScrollTrigger parallax ---
       if (watermarkBackRef.current) {
         gsap.to(watermarkBackRef.current, {
@@ -289,7 +322,7 @@ export default function Hero() {
             Autenticidade // Cultura // Express&atilde;o //
           </p>
           <p className="text-[10px] text-got-light/50 sm:text-xs">
-            &copy; 2026
+            GRUPO GOT
           </p>
           <div className="text-right text-[10px] text-got-light/70 sm:text-xs">
             <p>Niter&oacute;i / RJ</p>
@@ -348,33 +381,35 @@ export default function Hero() {
       {/* ===== 6. SOCIAL SIDEBAR ===== */}
       <div
         ref={socialsRef}
-        className="absolute left-6 top-1/2 z-30 hidden -translate-y-1/2 lg:flex lg:flex-col lg:gap-3"
+        className="social-sidebar absolute left-6 top-1/2 z-30 hidden -translate-y-1/2 lg:flex lg:flex-col lg:gap-3"
       >
         <a
           href="https://www.instagram.com/the_og.br/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="THE OG Instagram"
-          className="social-icon flex h-10 w-10 items-center justify-center rounded-full border border-got-gray/30 text-got-light/60 transition-all hover:border-got-pure/40 hover:text-got-pure"
+          className="social-icon group/social flex items-center gap-2 rounded-full border border-got-gray/30 text-got-light/60 transition-all duration-500 hover:border-got-accent/60 hover:text-got-accent h-10 px-3"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
             <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
             <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
           </svg>
+          <span className="social-label overflow-hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-wider opacity-0 max-w-0 transition-all duration-500">THE OG</span>
         </a>
         <a
           href="https://www.instagram.com/sesh_oficial/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="SESH Instagram"
-          className="social-icon flex h-10 w-10 items-center justify-center rounded-full border border-got-gray/30 text-got-light/60 transition-all hover:border-got-pure/40 hover:text-got-pure"
+          className="social-icon group/social flex items-center gap-2 rounded-full border border-got-gray/30 text-got-light/60 transition-all duration-500 hover:border-got-accent/60 hover:text-got-accent h-10 px-3"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
             <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
             <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
           </svg>
+          <span className="social-label overflow-hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-wider opacity-0 max-w-0 transition-all duration-500">SESH</span>
         </a>
       </div>
     </section>
