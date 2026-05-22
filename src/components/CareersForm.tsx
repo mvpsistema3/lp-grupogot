@@ -91,6 +91,41 @@ export default function CareersForm() {
             </svg>
           </a>
 
+          <div className="anim-career mt-10 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20%C3%A1rea%20de%20Cria%C3%A7%C3%A3o%20do%20GRUPO%20GOT."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-got-gray/30 px-5 py-2.5 text-sm text-got-light transition hover:border-got-accent hover:text-got-accent"
+            >
+              Criação
+            </a>
+            <a
+              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20%C3%A1rea%20Comercial%20do%20GRUPO%20GOT."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-got-gray/30 px-5 py-2.5 text-sm text-got-light transition hover:border-got-accent hover:text-got-accent"
+            >
+              Comercial
+            </a>
+            <a
+              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20%C3%A1rea%20de%20Opera%C3%A7%C3%B5es%20do%20GRUPO%20GOT."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-got-gray/30 px-5 py-2.5 text-sm text-got-light transition hover:border-got-accent hover:text-got-accent"
+            >
+              Operações
+            </a>
+            <a
+              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20%C3%A1rea%20de%20Marketing%20do%20GRUPO%20GOT."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-got-gray/30 px-5 py-2.5 text-sm text-got-light transition hover:border-got-accent hover:text-got-accent"
+            >
+              Marketing
+            </a>
+          </div>
+
           <p className="anim-career mt-6 text-sm text-got-gray">
             +55 21 99205-5840
           </p>

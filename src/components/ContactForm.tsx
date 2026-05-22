@@ -86,6 +86,33 @@ export default function ContactForm() {
             </svg>
           </a>
 
+          <div className="anim-contact mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <a
+              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20quero%20distribuir%20THE%20OG."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-got-gray/30 px-6 py-3 text-sm text-got-pure transition hover:border-got-accent hover:text-got-accent"
+            >
+              Quero distribuir THE OG
+            </a>
+            <a
+              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20quero%20distribuir%20SESH."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-got-gray/30 px-6 py-3 text-sm text-got-pure transition hover:border-got-accent hover:text-got-accent"
+            >
+              Quero distribuir SESH
+            </a>
+            <a
+              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20quero%20distribuir%20ambas%20as%20marcas."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-got-gray/30 px-6 py-3 text-sm text-got-pure transition hover:border-got-accent hover:text-got-accent"
+            >
+              Ambas as marcas
+            </a>
+          </div>
+
           <p className="anim-contact mt-6 text-sm text-got-gray">
             +55 21 99205-5840 · Seg a Sex, 9h às 18h
           </p>
