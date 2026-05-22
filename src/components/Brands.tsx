@@ -18,13 +18,12 @@ export default function Brands() {
 
       const cards = cardsRef.current.querySelectorAll(".brand-card");
       gsap.from(cards, {
-        y: 60,
+        y: 50,
         opacity: 0,
-        scale: 0.95,
-        rotation: -1,
-        stagger: 0.25,
-        duration: 1,
-        ease: "power3.out",
+        scale: 0.97,
+        stagger: 0.2,
+        duration: 1.1,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: cardsRef.current,
           start: "top 75%",

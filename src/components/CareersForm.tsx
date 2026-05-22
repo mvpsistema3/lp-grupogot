@@ -21,10 +21,10 @@ export default function CareersForm() {
       const items = sectionRef.current.querySelectorAll(".anim-career");
       gsap.from(items, {
         opacity: 0,
-        y: 50,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power3.out",
+        y: 40,
+        stagger: 0.12,
+        duration: 1,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 75%",

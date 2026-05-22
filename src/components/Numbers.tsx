@@ -29,9 +29,9 @@ export default function Numbers() {
       gsap.from(cards, {
         opacity: 0,
         y: 40,
-        stagger: 0.12,
-        duration: 0.7,
-        ease: "power3.out",
+        stagger: 0.1,
+        duration: 1,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: gridRef.current,
           start: "top 80%",
