@@ -304,15 +304,15 @@ export default function Hero() {
         <div className="flex-1" />
 
         {/* Bottom section */}
-        <div ref={bottomRef} className="flex flex-col items-end gap-6">
-          {/* Headline (mobile emphasis, desktop complement to watermark) */}
-          <p className="anim-item ml-auto max-w-lg text-right text-base leading-relaxed text-got-muted">
+        <div ref={bottomRef} className="flex flex-col items-center gap-6">
+          {/* Headline */}
+          <p className="anim-item max-w-lg text-center text-base leading-relaxed text-got-muted">
             Cultura, originalidade e express&atilde;o transformadas em marcas que
             conectam pessoas.
           </p>
 
           {/* Badges row */}
-          <div className="flex flex-wrap justify-end gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             <span className="anim-item rounded-full border border-got-gray/20 px-4 py-2 text-xs text-got-light">
               +5 anos
             </span>
