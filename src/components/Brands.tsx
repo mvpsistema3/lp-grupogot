@@ -52,6 +52,12 @@ export default function Brands() {
 
   useGSAP(
     () => {
+      // Pin + flip só no desktop. No mobile a seção vira scroll normal com os
+      // dois cards empilhados — pinar 3000px numa coluna empilhada corta o
+      // card e esconde os botões.
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 1024px)", () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -133,6 +139,7 @@ export default function Brands() {
         duration: 0.15,
         ease: "power2.in",
       });
+      });
     },
     { scope: sectionRef }
   );
@@ -141,11 +148,36 @@ export default function Brands() {
     <section
       id="marcas"
       ref={sectionRef}
-      className="relative h-screen w-full overflow-hidden bg-got-white"
+      className="relative w-full bg-got-white lg:h-screen lg:overflow-hidden"
     >
       <span className="section-number text-got-black">02</span>
 
-      <div className="brands-inner relative z-10 flex h-full items-center px-6 lg:px-16">
+      {/* Mobile — cards empilhados em scroll normal, sem pin/flip */}
+      <div className="relative z-10 px-6 py-20 lg:hidden">
+        <div className="mb-6 flex items-center gap-2">
+          <span className="inline-block h-2 w-2 rounded-full bg-got-accent" />
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-got-light">
+            NOSSAS MARCAS
+          </span>
+        </div>
+        <h2 className="mb-4 text-4xl font-black text-got-black">
+          Conheça nosso
+          <br />
+          <span className="text-got-accent">&ndash;</span>portfólio
+        </h2>
+        <p className="max-w-md text-base leading-relaxed text-got-gray">
+          Duas marcas com identidade própria que cobrem todo o espectro do
+          lifestyle urbano brasileiro.
+        </p>
+
+        <div className="mt-10 flex flex-col gap-8">
+          <MobileBrandCard brand={brands.sesh} />
+          <MobileBrandCard brand={brands.theog} />
+        </div>
+      </div>
+
+      {/* Desktop — experiência pinada com flip */}
+      <div className="brands-inner relative z-10 hidden h-full items-center px-6 lg:flex lg:px-16">
         <div className="grid w-full grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Left column — Title (centered horizontally in its column, left vertically) */}
           <div className="brands-heading flex flex-col justify-center lg:col-span-4">
@@ -239,6 +271,89 @@ export default function Brands() {
         </div>
       </div>
     </section>
+  );
+}
+
+function MobileBrandCard({
+  brand,
+}: {
+  brand: (typeof brands)[keyof typeof brands];
+}) {
+  return (
+    <div className="overflow-hidden rounded-3xl bg-got-black">
+      <div className="relative h-56 w-full">
+        <img
+          src={brand.photo}
+          alt={brand.name}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+          <img
+            src={brand.logo}
+            alt={`${brand.name} logo`}
+            className="h-8 object-contain brightness-0 invert"
+          />
+        </div>
+      </div>
+
+      <div className="p-6">
+        <div className="mb-3 flex items-center gap-3">
+          <span className="text-sm font-bold text-got-accent">
+            {brand.year}
+          </span>
+          <span className="text-sm text-got-light">{brand.category}</span>
+        </div>
+
+        <h3 className="mb-2 text-2xl font-black text-got-pure">
+          {brand.name}
+        </h3>
+
+        <p className="mb-5 text-sm leading-relaxed text-got-muted">
+          {brand.description}
+        </p>
+
+        <div className="mb-6 grid grid-cols-2 gap-4">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-got-accent">
+              Público
+            </span>
+            <p className="mt-1 text-sm leading-relaxed text-got-light">
+              {brand.publico}
+            </p>
+          </div>
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-got-accent">
+              Diferencial
+            </span>
+            <p className="mt-1 text-sm leading-relaxed text-got-light">
+              {brand.diferencial}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          <a
+            href={brand.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-got-accent px-5 py-3 text-sm font-semibold text-got-black transition hover:scale-[1.02]"
+          >
+            <WhatsAppIcon />
+            Quero distribuir
+          </a>
+          <a
+            href={brand.site}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-got-gray/30 px-5 py-3 text-sm text-got-pure transition hover:border-got-accent hover:text-got-accent"
+          >
+            Conhecer a marca &mdash; {brand.siteLabel} &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 
