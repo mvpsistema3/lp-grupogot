@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { COMMERCIAL_WHATSAPP, waLink } from "@/lib/contacts";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,8 +20,7 @@ const brands = {
       "Liberdade de expressão, humor, caos criativo, autenticidade sem tabu",
     site: "https://sesh.com.br",
     siteLabel: "sesh.com.br",
-    whatsapp:
-      "https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20marca%20SESH.",
+    whatsapp: waLink(COMMERCIAL_WHATSAPP, "Olá, tenho interesse na marca SESH."),
     logo: "/logos/logo-sesh.png",
     photo: "/photos/foto-sesh.png",
   },
@@ -35,8 +35,7 @@ const brands = {
       "Design marcante, qualidade acima da média, forte conexão emocional",
     site: "https://theog.com.br",
     siteLabel: "theog.com.br",
-    whatsapp:
-      "https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20marca%20THE%20OG.",
+    whatsapp: waLink(COMMERCIAL_WHATSAPP, "Olá, tenho interesse na marca THE OG."),
     logo: "/logos/logo-theog.png",
     photo: "/photos/foto-theog.jpg",
   },
@@ -64,38 +63,10 @@ export default function Brands() {
         },
       });
 
-      // Phase 1: Title + subtitle fade in and settle (0 → 0.15)
-      tl.from(".brands-heading", {
-        autoAlpha: 0,
-        y: 60,
-        duration: 0.15,
-        ease: "power2.out",
-      });
-
-      // Phase 2: SESH content slides in from right + photo appears (0.15 → 0.35)
-      tl.from(
-        ".brand-content",
-        {
-          autoAlpha: 0,
-          x: 80,
-          duration: 0.15,
-          ease: "power2.out",
-        },
-        0.15
-      );
-      tl.from(
-        ".photo-container",
-        {
-          autoAlpha: 0,
-          scale: 0.85,
-          duration: 0.15,
-          ease: "power2.out",
-        },
-        0.18
-      );
-
-      // Phase 3: Pause zone — user sees SESH (0.35 → 0.45)
-      tl.to({}, { duration: 0.1 });
+      // Conteúdo visível desde o início do pin — quem chega pelo menu ("Marcas")
+      // cai no progresso 0 e precisa ver a SESH imediatamente.
+      // Phase 1: Pause zone — user sees SESH (0 → 0.45)
+      tl.to({}, { duration: 0.45 });
 
       // Phase 4: Photo flips + info swaps (0.45 → 0.65)
       // Fade out SESH info

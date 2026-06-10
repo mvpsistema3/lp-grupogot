@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { COMMERCIAL_WHATSAPP, waLink } from "@/lib/contacts";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -359,7 +360,7 @@ export default function Hero() {
           {/* CTAs row */}
           <div className="flex flex-col gap-4 sm:flex-row">
             <a
-              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20as%20marcas%20do%20GRUPO%20GOT."
+              href={waLink(COMMERCIAL_WHATSAPP, "Olá, gostaria de saber mais sobre as marcas do GRUPO GOT.")}
               target="_blank"
               rel="noopener noreferrer"
               className="anim-item inline-flex items-center justify-center gap-2 rounded-full bg-got-accent px-8 py-3.5 text-sm font-semibold tracking-wide text-got-black transition-transform hover:scale-[1.02]"
@@ -369,7 +370,7 @@ export default function Hero() {
             </a>
             <a
               href="#marcas"
-              onClick={(e) => { e.preventDefault(); document.getElementById('marcas')?.scrollIntoView({ behavior: 'smooth' }); }}
+              onClick={(e) => { e.preventDefault(); const el = document.getElementById('marcas'); (el?.closest('.pin-spacer') ?? el)?.scrollIntoView({ behavior: 'smooth' }); }}
               className="anim-item inline-flex items-center justify-center rounded-full border border-got-gray/30 px-8 py-3.5 text-sm text-got-muted transition-colors hover:border-got-light cursor-pointer"
             >
               Conhe&ccedil;a nossas marcas

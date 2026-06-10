@@ -6,11 +6,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import ParallaxSection from "@/components/ui/ParallaxSection";
 import SectionLabel from "@/components/ui/SectionLabel";
+import {
+  COMMERCIAL_WHATSAPP,
+  OPERATIONS_WHATSAPP,
+  waLink,
+} from "@/lib/contacts";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const WHATSAPP_URL =
-  "https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20trabalhar%20no%20GRUPO%20GOT.";
+const WHATSAPP_URL = waLink(
+  COMMERCIAL_WHATSAPP,
+  "Olá, tenho interesse em trabalhar no GRUPO GOT."
+);
 
 export default function CareersForm() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -93,7 +100,7 @@ export default function CareersForm() {
 
           <div className="anim-career mt-10 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20%C3%A1rea%20de%20Cria%C3%A7%C3%A3o%20do%20GRUPO%20GOT."
+              href={waLink(COMMERCIAL_WHATSAPP, "Olá, tenho interesse na área de Criação do GRUPO GOT.")}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-got-gray/30 px-5 py-2.5 text-sm text-got-light transition hover:border-got-accent hover:text-got-accent"
@@ -101,7 +108,7 @@ export default function CareersForm() {
               Criação
             </a>
             <a
-              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20%C3%A1rea%20Comercial%20do%20GRUPO%20GOT."
+              href={waLink(COMMERCIAL_WHATSAPP, "Olá, tenho interesse na área Comercial do GRUPO GOT.")}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-got-gray/30 px-5 py-2.5 text-sm text-got-light transition hover:border-got-accent hover:text-got-accent"
@@ -109,7 +116,7 @@ export default function CareersForm() {
               Comercial
             </a>
             <a
-              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20%C3%A1rea%20de%20Opera%C3%A7%C3%B5es%20do%20GRUPO%20GOT."
+              href={waLink(OPERATIONS_WHATSAPP, "Olá, tenho interesse na área de Operações do GRUPO GOT.")}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-got-gray/30 px-5 py-2.5 text-sm text-got-light transition hover:border-got-accent hover:text-got-accent"
@@ -117,7 +124,7 @@ export default function CareersForm() {
               Operações
             </a>
             <a
-              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20%C3%A1rea%20de%20Marketing%20do%20GRUPO%20GOT."
+              href={waLink(COMMERCIAL_WHATSAPP, "Olá, tenho interesse na área de Marketing do GRUPO GOT.")}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-got-gray/30 px-5 py-2.5 text-sm text-got-light transition hover:border-got-accent hover:text-got-accent"

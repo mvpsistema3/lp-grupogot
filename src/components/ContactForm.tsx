@@ -6,11 +6,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import ParallaxSection from "@/components/ui/ParallaxSection";
 import SectionLabel from "@/components/ui/SectionLabel";
+import { COMMERCIAL_WHATSAPP, waLink } from "@/lib/contacts";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const WHATSAPP_URL =
-  "https://wa.me/5521992055840?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20as%20marcas%20do%20GRUPO%20GOT.";
+const WHATSAPP_URL = waLink(
+  COMMERCIAL_WHATSAPP,
+  "Olá, gostaria de saber mais sobre as marcas do GRUPO GOT."
+);
 
 export default function ContactForm() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -88,7 +91,7 @@ export default function ContactForm() {
 
           <div className="anim-contact mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
-              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20quero%20distribuir%20THE%20OG."
+              href={waLink(COMMERCIAL_WHATSAPP, "Olá, quero distribuir THE OG.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-got-gray/30 px-6 py-3 text-sm text-got-pure transition hover:border-got-accent hover:text-got-accent"
@@ -96,7 +99,7 @@ export default function ContactForm() {
               Quero distribuir THE OG
             </a>
             <a
-              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20quero%20distribuir%20SESH."
+              href={waLink(COMMERCIAL_WHATSAPP, "Olá, quero distribuir SESH.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-got-gray/30 px-6 py-3 text-sm text-got-pure transition hover:border-got-accent hover:text-got-accent"
@@ -104,7 +107,7 @@ export default function ContactForm() {
               Quero distribuir SESH
             </a>
             <a
-              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20quero%20distribuir%20ambas%20as%20marcas."
+              href={waLink(COMMERCIAL_WHATSAPP, "Olá, quero distribuir ambas as marcas.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-got-gray/30 px-6 py-3 text-sm text-got-pure transition hover:border-got-accent hover:text-got-accent"

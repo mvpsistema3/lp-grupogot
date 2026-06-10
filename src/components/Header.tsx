@@ -2,6 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { COMMERCIAL_WHATSAPP, waLink } from "@/lib/contacts";
+
+const COMMERCIAL_LINK = waLink(
+  COMMERCIAL_WHATSAPP,
+  "Olá, gostaria de saber mais sobre as marcas do GRUPO GOT."
+);
 
 const NAV_ITEMS = [
   { label: "Sobre", href: "#sobre" },
@@ -48,7 +54,11 @@ export default function Header() {
 
   const scrollTo = (href: string) => {
     const id = href.replace("#", "");
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(id);
+    // Seções pinadas pelo ScrollTrigger se deslocam dentro do pin-spacer;
+    // mirar o spacer garante cair no início da animação, não no fim.
+    const target = el?.closest(".pin-spacer") ?? el;
+    target?.scrollIntoView({ behavior: "smooth" });
     setMobileOpen(false);
   };
 
@@ -80,7 +90,7 @@ export default function Header() {
 
         {/* Desktop CTA */}
         <a
-          href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20as%20marcas%20do%20GRUPO%20GOT."
+          href={COMMERCIAL_LINK}
           target="_blank"
           rel="noopener noreferrer"
           className="ml-2 hidden items-center gap-2 rounded-full bg-got-accent px-5 py-2 text-sm font-semibold text-got-black transition-opacity hover:opacity-90 md:inline-flex"
@@ -117,7 +127,7 @@ export default function Header() {
               </button>
             ))}
             <a
-              href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20as%20marcas%20do%20GRUPO%20GOT."
+              href={COMMERCIAL_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 rounded-full bg-got-accent px-5 py-2 text-center text-sm font-semibold text-got-black"

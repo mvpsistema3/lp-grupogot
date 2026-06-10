@@ -4,6 +4,11 @@ import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  COMMERCIAL_WHATSAPP,
+  COMMERCIAL_WHATSAPP_DISPLAY,
+  waLink,
+} from "@/lib/contacts";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,15 +67,15 @@ export default function Footer() {
         </span>
 
         <a
-          href="https://wa.me/5521992055840"
+          href={waLink(COMMERCIAL_WHATSAPP)}
           target="_blank"
           rel="noopener noreferrer"
           className="text-3xl lg:text-5xl font-bold text-got-pure tracking-tight mb-4 hover:text-got-accent transition-colors"
         >
-          +55 21 99205-5840
+          {COMMERCIAL_WHATSAPP_DISPLAY}
         </a>
         <a
-          href="https://wa.me/5521992055840?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20GRUPO%20GOT."
+          href={waLink(COMMERCIAL_WHATSAPP, "Olá, gostaria de saber mais sobre o GRUPO GOT.")}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 inline-flex items-center gap-2 text-lg lg:text-2xl text-got-accent hover:underline underline-offset-4"
