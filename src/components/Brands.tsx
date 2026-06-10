@@ -22,7 +22,7 @@ const brands = {
     siteLabel: "sesh.com.br",
     whatsapp: waLink(COMMERCIAL_WHATSAPP, "Olá, tenho interesse na marca SESH."),
     logo: "/logos/logo-sesh.png",
-    photo: "/photos/foto-sesh.png",
+    photo: "/photos/foto-sesh.webp",
   },
   theog: {
     name: "THE OG",
@@ -37,7 +37,7 @@ const brands = {
     siteLabel: "theog.com.br",
     whatsapp: waLink(COMMERCIAL_WHATSAPP, "Olá, tenho interesse na marca THE OG."),
     logo: "/logos/logo-theog.png",
-    photo: "/photos/foto-theog.jpg",
+    photo: "/photos/foto-theog.webp",
   },
 };
 
@@ -180,6 +180,8 @@ export default function Brands() {
                 <img
                   src={brands.sesh.photo}
                   alt="SESH"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
@@ -204,6 +206,8 @@ export default function Brands() {
                 <img
                   src={brands.theog.photo}
                   alt="THE OG"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
